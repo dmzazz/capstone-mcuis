@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {View, Modal, Text} from 'react-native';
-import WarningIcon from '../../assets/warning.svg';
 
 const AlertFireFighter = ({navigation}) => {
   const [countdown, setCountdown] = useState(3); // State untuk menyimpan countdown
@@ -14,7 +13,7 @@ const AlertFireFighter = ({navigation}) => {
     // Membersihkan timer ketika countdown mencapai 0
     if (countdown === 0) {
       clearInterval(redirectTimer);
-      navigation.navigate('EarlyWarning'); // Redirect ke halaman change profile
+      navigation.navigate('EarlyWarning'); // Redirect ke halaman confirmation
     }
 
     // Membersihkan timer ketika komponen unmount
@@ -34,10 +33,9 @@ const AlertFireFighter = ({navigation}) => {
           className="bg-white w-[95%] mt-16 p-2 rounded-lg"
           style={{elevation: 5}}>
           <View className="flex-row items-center">
-            <Text className="text-black text-lg font-bold mr-1 mb-2">
-              There has been a fire!!!
+            <Text className="text-red-500 text-lg font-bold mr-1 mb-2">
+              Danger!
             </Text>
-            <WarningIcon width={26} height={26} />
           </View>
           <Text className="text-black">
             You will be redirected to the user location page within {countdown}{' '}

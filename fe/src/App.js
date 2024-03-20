@@ -4,6 +4,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import 'react-native-gesture-handler';
 import {Image} from 'react-native'; // Import Image component
+
+// Import Component
 import Home from './pages/home-page/Home';
 import Login from './pages/Login';
 import History from './pages/history-fire/History';
