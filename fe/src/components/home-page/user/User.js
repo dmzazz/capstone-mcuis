@@ -2,13 +2,14 @@ import React, {useState, useEffect} from 'react';
 import {Text, View, Image} from 'react-native';
 
 // Import component
-import { AllowPermission } from '../../allow-permission/AllowPermission';
+import {AllowPermission} from '../../allow-permission/AllowPermission';
 import {CarouselSelfEvacuation} from '../../components/carousel/CarouselSelfEvacuation';
 import AlertUser from '../../alert-user/AlertUser';
 import HeaderHome from '../../header-home/HeaderHome';
 
 // Import SVG
 import HeaderImageMain from '../../../assets/header-main.svg';
+import CarouselCardItem from '../../carousel/CarouselCardItem';
 
 const User = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(true);
@@ -114,10 +115,8 @@ const User = ({navigation}) => {
             </Text>{' '}
             to see details
           </Text>
+          <CarouselCardItem/>
         </View>
-        {/* <View>
-        <CarouselSelfEvacuation/>
-      </View> */}
 
         {/* Modal Allow Permission */}
         <View className="flex-1 justify-center items-center">
