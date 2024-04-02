@@ -1,0 +1,32 @@
+POST http://localhost:5000/api/v1/users/
+Content-Type: application/json
+
+{
+    "email": "user@user.com",
+    "password": "user",
+    "confirmPassword": "user",
+    "role": "user"
+}
+
+### Login
+POST http://localhost:5000/api/v1/login
+
+{
+    "email": "user@user.com",
+    "password": "user"
+
+}
+
+###
+GET http://localhost:5000/api/v1/users/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxMjAyMTE4NywiZXhwIjoxNzEyMDIxMjA3fQ.pu8sYyNN_zVDIHiN2bQn0drgor9NiAhUMTuIWfU4Hw4
+
+ 
+###
+POST http://localhost:5000/api/v1/login
+Content-Type: application/json
+
+{
+    "email": "admin@admin.com",
+    "password": "admin"
+}
