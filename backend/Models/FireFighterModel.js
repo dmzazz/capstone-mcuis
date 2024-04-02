@@ -1,4 +1,4 @@
-import Database from "../Config/Database";
+import Database from "../Config/Database.js";
 import { DataTypes } from "sequelize";
 
 const FireFighterModel = Database.define("fire_fighter", {

@@ -1,6 +1,6 @@
-import FireSensorModel from "../models/FireSensorModel";
+import FireSensorModel from "../Models/FireSensorModel.js";
 
-export const saveSensorData = async (req, res) => {
+export const SaveSensorData = async (req, res) => {
   try {
     const { apiValue, smokeValue, location } = req.body;
 

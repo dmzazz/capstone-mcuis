@@ -1,5 +1,4 @@
 import Database from "../Config/Database";
-import FireSensorModel from "./FireSensorModel";
 import { DataTypes } from "sequelize";
 
 const HotspotModel = Database.define("hotspot", {

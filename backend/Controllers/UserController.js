@@ -14,21 +14,31 @@ export const getUsers = async (req, res) => {
 
 export const Register = async (req, res) => {
   const { email, role, password, confirmPassword } = req.body;
-  if (password !== confirmPassword)
-    return res.status(400).json({ msg: "Password don't match" });
 
-  //Hash Password with bcrypt with Register account
+  // Check if email already exists in the database
+  const existingUser = await UserModel.findOne({ where: { email: email } });
+  if (existingUser) {
+    return res.status(400).json({ msg: "Email already exists" });
+  }
+
+  if (password !== confirmPassword) {
+    return res.status(400).json({ msg: "Passwords don't match" });
+  }
+
+  // Hash Password with bcrypt with Register account
   const salt = await bcrypt.genSalt();
   const hashPassword = await bcrypt.hash(password, salt);
+
   try {
     await UserModel.create({
       email: email,
       role: role,
       password: hashPassword,
     });
-    res.json({ msg: "Create Account Succefully!" });
+    res.json({ msg: "Create Account Successfully!" });
   } catch (error) {
-    console.log(error, { msg: "Failed Create Account" });
+    console.error(error);
+    res.status(500).json({ msg: "Failed to create account" });
   }
 };
 

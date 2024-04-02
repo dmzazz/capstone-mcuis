@@ -1,5 +1,5 @@
-import Database from "../Config/Database";
-import UserModel from "./UserModel";
+import Database from "../Config/Database.js";
+import UserModel from "./UserModel.js";
 import { DataTypes } from "sequelize";
 
 const FireSensorModel = Database.define(

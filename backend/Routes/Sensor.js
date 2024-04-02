@@ -1,9 +1,8 @@
 import express from "express";
-import { saveSensorData } from "../Controllers/SensorController";
-import { VerifyToken } from "../Middleware/VerifyToken";
+import { SaveSensorData } from "../Controllers/SensorController.js";
 
 const router = express.Router();
 
-router.post("/sensor", VerifyToken, saveSensorData);
+router.post("/sensor", SaveSensorData);
 
 export default router;

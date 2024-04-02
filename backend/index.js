@@ -2,6 +2,8 @@ import express from "express";
 import Database from "./Config/Database.js";
 import dotenv from "dotenv";
 import UserRoutes from "./Routes/User.js";
+import FireFighterRoutes from "./Routes/FireFighter.js";
+import SensorRoutes from "./Routes/Sensor.js";
 // import cors from "cors";
 import cookieParser from "cookie-parser";
 
@@ -18,6 +20,6 @@ try {
 // app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 app.use(express.json());
 app.use(cookieParser());
-app.use("/api/v1", UserRoutes);
+app.use("/api/v1", UserRoutes, FireFighterRoutes, SensorRoutes);
 
 app.listen(5000, () => console.log("Server Running at port 5000... "));
