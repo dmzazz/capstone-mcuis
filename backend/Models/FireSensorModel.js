@@ -34,14 +34,6 @@ const FireSensorModel = Database.define(
       type: DataTypes.ENUM("active", "inactive"),
       allowNull: false,
     },
-    user_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: UserModel,
-        key: "id",
-      },
-    },
   },
   {
     timestamps: false,

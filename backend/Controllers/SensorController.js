@@ -2,11 +2,14 @@ import FireSensorModel from "../Models/FireSensorModel.js";
 
 export const SaveSensorData = async (req, res) => {
   try {
-    const { apiValue, smokeValue, location } = req.body;
+    const { sensor_name, sensor_type, fire_value, smoke_value, location } =
+      req.body;
 
     const newSensorData = await FireSensorModel.create({
-      apiValue,
-      smokeValue,
+      sensor_name,
+      sensor_type,
+      fire_value,
+      smoke_value,
       location,
     });
 
