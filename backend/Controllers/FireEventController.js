@@ -7,9 +7,9 @@ export const HandleSensorDetection = async () => {
     const sensors = await FireSensorModel.findAll();
 
     // Looping untuk setiap sensor
-    sensors.forEach(async (sensor) => {
+    for (const sensor of sensors) {
       // Cek jika sensor flame terdeteksi
-      if (sensor.fire_value === 1) {
+      if (sensor.fire_level === 1) {
         // Membuat entri FireEvent untuk deteksi api
         await FireEvent.create({
           location: sensor.location,
@@ -29,7 +29,7 @@ export const HandleSensorDetection = async () => {
         });
         console.log("Asap/Gas terdeteksi di sensor:", sensor.sensor_name);
       }
-    });
+    }
   } catch (error) {
     console.error("Error handling sensor detection:", error);
   }

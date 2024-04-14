@@ -24,9 +24,6 @@ const FireSensorModel = Database.define(
     location: {
       type: DataTypes.STRING,
     },
-    status: {
-      type: DataTypes.ENUM("active", "inactive"),
-    },
   },
   {
     timestamps: true,

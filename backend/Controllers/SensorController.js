@@ -11,6 +11,7 @@ export const SaveSensorData = async (req, res) => {
       fire_level,
       smoke_value,
       location,
+      status: "active",
     });
 
     res

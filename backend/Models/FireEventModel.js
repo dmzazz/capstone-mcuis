@@ -12,11 +12,9 @@ const FireEvent = Database.define(
     },
     location: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     event_type: {
       type: DataTypes.ENUM("fire", "smoke"),
-      allowNull: false,
     },
     fire_sensor_id: {
       type: DataTypes.INTEGER,
