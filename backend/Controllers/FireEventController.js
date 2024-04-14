@@ -1,36 +1,40 @@
-import FireSensorModel from "../Models/FireSensorModel.js";
-import FireEvent from "../Models/FireEventModel.js";
+import FireEventModel from "../Models/FireEventModel.js";
 
-export const HandleSensorDetection = async () => {
+export const HandleSensorDetection = async (newSensorData) => {
   try {
-    // Mendapatkan data dari semua sensor
-    const sensors = await FireSensorModel.findAll();
+    // Cek jika sensor flame terdeteksi
+    if (newSensorData.fire_level === 1) {
+      // Membuat entri FireEvent untuk deteksi api
+      await FireEventModel.create({
+        location: newSensorData.location,
+        event_type: "fire",
+        fire_sensor_id: newSensorData.id,
+      });
+      console.log("Api terdeteksi di sensor:", newSensorData.sensor_name);
+    }
 
-    // Looping untuk setiap sensor
-    for (const sensor of sensors) {
-      // Cek jika sensor flame terdeteksi
-      if (sensor.fire_level === 1) {
-        // Membuat entri FireEvent untuk deteksi api
-        await FireEvent.create({
-          location: sensor.location,
-          event_type: "fire",
-          fire_sensor_id: sensor.id,
-        });
-        console.log("Api terdeteksi di sensor:", sensor.sensor_name);
-      }
-
-      // Cek jika sensor MQ2 mendeteksi asap atau gas
-      if (sensor.smoke_value > 0) {
-        // Membuat entri FireEvent untuk deteksi asap
-        await FireEvent.create({
-          location: sensor.location,
-          event_type: "smoke",
-          fire_sensor_id: sensor.id,
-        });
-        console.log("Asap/Gas terdeteksi di sensor:", sensor.sensor_name);
-      }
+    // Cek jika sensor MQ2 mendeteksi asap atau gas
+    if (newSensorData.smoke_value > 0) {
+      // Membuat entri FireEvent untuk deteksi asap
+      await FireEventModel.create({
+        location: newSensorData.location,
+        event_type: "smoke",
+        fire_sensor_id: newSensorData.id,
+      });
+      console.log("Asap/Gas terdeteksi di sensor:", newSensorData.sensor_name);
     }
   } catch (error) {
     console.error("Error handling sensor detection:", error);
+  }
+};
+
+//get all fire events
+
+export const getFireEvents = async (req, res) => {
+  try {
+    const fireEvents = await FireEvent.findAll();
+    return res.status(200).json(fireEvents);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
   }
 };
