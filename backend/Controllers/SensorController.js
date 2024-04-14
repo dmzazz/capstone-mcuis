@@ -2,20 +2,27 @@ import FireSensorModel from "../Models/FireSensorModel.js";
 
 export const SaveSensorData = async (req, res) => {
   try {
-    const { sensor_name, sensor_type, fire_value, smoke_value, location } =
-      req.body;
+    const { fireValue, smokeValue } = req.body;
 
-    const newSensorData = await FireSensorModel.create({
-      sensor_name,
-      sensor_type,
-      fire_value,
-      smoke_value,
-      location,
-    });
+    // Check if flame is detected
+    const isFlameDetected = fireValue === 1; // Adjust this condition based on your actual data format
 
-    res
-      .status(201)
-      .json({ message: "Data sensor berhasil disimpan", data: newSensorData });
+    // If flame is detected, save sensor data to database
+    if (isFlameDetected) {
+      await FireSensorModel.create({
+        sensor_name: "sensor fire",
+        sensor_type: "temperature",
+        fire_level: 1, // Set fire level to 1 when flame is detected
+        smoke_value: smokeValue, // You may adjust this based on your actual data
+        location: "your_location",
+        status: "active",
+      });
+
+      res.status(201).json({ message: "Data sensor berhasil disimpan" });
+    } else {
+      // If flame is not detected, do nothing or send response indicating no data saved
+      res.status(200).json({ message: "Tidak ada data sensor yang disimpan" });
+    }
   } catch (error) {
     console.error("Error saving sensor data:", error);
     res

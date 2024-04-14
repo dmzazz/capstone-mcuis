@@ -2,24 +2,20 @@ POST http://localhost:5000/api/v1/users/
 Content-Type: application/json
 
 {
-    "email": "user@user.com",
-    "password": "user",
-    "confirmPassword": "user",
+    "email": "dimas@user.com",
+    "password": "dimas",
+    "confirmPassword": "dimas",
     "role": "user"
 }
 
-### Login
-POST http://localhost:5000/api/v1/login
 
-{
-    "email": "user@user.com",
-    "password": "user"
-
-}
 
 ###
 GET http://localhost:5000/api/v1/users/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxMjAyMTE4NywiZXhwIjoxNzEyMDIxMjA3fQ.pu8sYyNN_zVDIHiN2bQn0drgor9NiAhUMTuIWfU4Hw4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTcxMjE5MTUxNywiZXhwIjoxNzEyMTkxNTM3fQ.hohIkCLJaexkH-ml35mWIBiLv_d2dDm5u0SfPOjkxFY
+ 
+
+
 
  
 ###
@@ -27,6 +23,6 @@ POST http://localhost:5000/api/v1/login
 Content-Type: application/json
 
 {
-    "email": "admin@admin.com",
-    "password": "admin"
+    "email": "dimas@user.com",
+    "password": "dimas"
 }

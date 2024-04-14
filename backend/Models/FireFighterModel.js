@@ -1,4 +1,5 @@
 import Database from "../Config/Database.js";
+import UserModel from "./UserModel.js";
 import { DataTypes } from "sequelize";
 
 const FireFighterModel = Database.define("fire_fighter", {
@@ -16,13 +17,19 @@ const FireFighterModel = Database.define("fire_fighter", {
     allowNull: false,
   },
   status: {
-    type: DataTypes.ENUM("active", "inactive"),
+    type: DataTypes.STRING,
     allowNull: false,
   },
   contact_number: {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  user_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: UserModel,
+      key: "id",
+    },
+  },
 });
-
 export default FireFighterModel;

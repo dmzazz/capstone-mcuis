@@ -1,5 +1,4 @@
 import Database from "../Config/Database.js";
-import UserModel from "./UserModel.js";
 import { DataTypes } from "sequelize";
 
 const FireSensorModel = Database.define(
@@ -12,31 +11,25 @@ const FireSensorModel = Database.define(
     },
     sensor_name: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     sensor_type: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
-    smoke_level: {
+    smoke_value: {
       type: DataTypes.INTEGER,
-      allowNull: false,
     },
     fire_level: {
       type: DataTypes.INTEGER,
-      allowNull: false,
     },
     location: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     status: {
       type: DataTypes.ENUM("active", "inactive"),
-      allowNull: false,
     },
   },
   {
-    timestamps: false,
+    timestamps: true,
     tableName: "fire_sensor",
     underscored: true,
   }

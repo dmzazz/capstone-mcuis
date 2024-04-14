@@ -1,0 +1,9 @@
+POST http://localhost:5000/api/v1/firefighter/
+Content-Type: application/json
+
+{
+    "name": "dimasbomber",
+    "location": "Cikarang Timur",
+    "status": "Active",
+    "contanct_number": "08123456789"
+}
