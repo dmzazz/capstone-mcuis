@@ -2,19 +2,18 @@ POST http://localhost:5000/api/v1/users/
 Content-Type: application/json
 
 {
-    "email": "dimas@user.com",
-    "password": "dimas",
-    "confirmPassword": "dimas",
-    "role": "user"
+    "nama": "Wendy",
+    "email": "wendy@admin.com",
+    "password": "wendy",
+    "confirmPassword": "wendy",
+    "role": "admin"
 }
 
 
 
 ###
 GET http://localhost:5000/api/v1/users/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTcxMjE5MTUxNywiZXhwIjoxNzEyMTkxNTM3fQ.hohIkCLJaexkH-ml35mWIBiLv_d2dDm5u0SfPOjkxFY
- 
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxMzQwMTM2NiwiZXhwIjoxNzEzNDAxMzg2fQ.j3grvhRSrDNkZlTP0Q1dq0FY1PtFWvqFmpOGOl70h1w
 
 
  
@@ -23,6 +22,22 @@ POST http://localhost:5000/api/v1/login
 Content-Type: application/json
 
 {
-    "email": "dimas@user.com",
-    "password": "dimas"
+    "email": "wendy@admin.com",
+    "password": "wendy"
 }
+
+###
+PUT http://localhost:5000/api/v1/change-password
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxMzQyOTM5NCwiZXhwIjoxNzEzNDMwMzk0fQ.50YyqkXe56MRIYx51uRntpJJNgeYT3KAOpAJMwU6Bps
+Content-Type: application/json
+
+{
+    "oldPassword": "wendy",
+    "newPassword": "dimas123",
+    "confirmPassword": "dimas123"
+}
+
+
+###
+DELETE http://localhost:5000/api/v1/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcxMzQwNDkyNywiZXhwIjoxNzEzNDA1OTI3fQ.ylGL1xYeJsZQCOpIDlrMnnZa_kKHTrDwTx1cqB38qRs

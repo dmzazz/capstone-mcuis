@@ -11,7 +11,10 @@ const UserModel = Database.define(
       autoIncrement: true,
       primaryKey: true,
     },
-
+    nama: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,

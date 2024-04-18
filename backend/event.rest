@@ -1,0 +1,16 @@
+GET http://localhost:5000/api/v1/fire-events/
+Content-Type: application/json
+
+{
+
+}
+
+###
+POST http://localhost:5000/api/v1/fire-events/
+Content-Type: application/json
+
+{
+    "location": "Kampala",
+    "event_type": "Fire",
+    "fire_sensor_id": "1"
+}

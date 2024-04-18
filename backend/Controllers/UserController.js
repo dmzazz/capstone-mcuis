@@ -14,7 +14,7 @@ export const getUsers = async (req, res) => {
 };
 
 export const Register = async (req, res) => {
-  const { email, role, password, confirmPassword } = req.body;
+  const { email, role, nama, password, confirmPassword } = req.body;
 
   // Check if email already exists in the database
   const existingUser = await UserModel.findOne({ where: { email: email } });
@@ -34,6 +34,7 @@ export const Register = async (req, res) => {
     await UserModel.create({
       email: email,
       role: role,
+      nama: nama,
       password: hashPassword,
     });
     res.json({ msg: "Create Account Successfully!" });
@@ -64,7 +65,7 @@ export const Login = async (req, res) => {
       { userId: user.id },
       process.env.ACCESS_TOKEN_SECRET,
       {
-        expiresIn: "20s",
+        expiresIn: "1000s",
       }
     );
 
@@ -122,5 +123,44 @@ export const Logout = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: "Internal Server Error" });
+  }
+};
+
+//Change Password
+export const changePassword = async (req, res) => {
+  const { oldPassword, newPassword, confirmPassword } = req.body;
+
+  if (newPassword !== confirmPassword) {
+    return res.status(400).json({ msg: "Passwords don't match" });
+  }
+
+  try {
+    const user = await UserModel.findOne({
+      where: {
+        id: req.user.userId, // Menggunakan req.user.userId bukan req.user.id
+      },
+    });
+
+    const match = await bcrypt.compare(oldPassword, user.password);
+    if (!match) {
+      return res.status(400).json({ msg: "Old password is incorrect" });
+    }
+
+    const salt = await bcrypt.genSalt();
+    const hashPassword = await bcrypt.hash(newPassword, salt);
+
+    await UserModel.update(
+      { password: hashPassword },
+      {
+        where: {
+          id: req.user.userId,
+        },
+      }
+    );
+
+    res.json({ msg: "Password changed successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Failed to change password" });
   }
 };
