@@ -3,8 +3,14 @@ import { HandleSensorDetection } from "../Controllers/FireEventController.js";
 
 export const SaveSensorData = async (req, res) => {
   try {
-    const { sensor_name, sensor_type, fire_level, smoke_value, location } =
-      req.body;
+    const {
+      sensor_name,
+      sensor_type,
+      fire_level,
+      smoke_value,
+      location,
+      status,
+    } = req.body;
 
     const newSensorData = await FireSensorModel.create({
       sensor_name,
@@ -12,15 +18,20 @@ export const SaveSensorData = async (req, res) => {
       fire_level,
       smoke_value,
       location,
-      status: "active",
+      status,
     });
+
+    newSensorData.status =
+      fire_level > 0 ? "Dangerous Fire Detected" : "Smoke Detected";
 
     // Memanggil fungsi HandleSensorDetection dengan data sensor yang baru disimpan
     await HandleSensorDetection(newSensorData);
 
-    res
-      .status(201)
-      .json({ message: "Data sensor berhasil disimpan", data: newSensorData });
+    res.status(201).json({
+      message: "Data sensor berhasil disimpan",
+      data: newSensorData,
+      status: newSensorData.status,
+    });
   } catch (error) {
     console.error("Error saving sensor data:", error);
     res

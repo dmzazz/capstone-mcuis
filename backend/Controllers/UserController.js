@@ -91,7 +91,13 @@ export const Login = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000,
     });
 
-    res.json({ accessToken });
+    res.json({
+      accessToken,
+      nama: user.nama,
+      role: user.role,
+      email: user.email,
+      userId: user.id,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: "Terjadi kesalahan server" });
