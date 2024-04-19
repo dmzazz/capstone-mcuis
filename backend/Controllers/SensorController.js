@@ -41,11 +41,33 @@ export const SaveSensorData = async (req, res) => {
 
 //get all sensors
 
-export const getAllSensors = async (req, res) => {
+export const GetSensorData = async (req, res) => {
   try {
-    const sensors = await FireSensorModel.findAll();
-    return res.status(200).json(sensors);
+    const sensorData = await FireSensorModel.findAll();
+
+    const sensorDataWithStatus = sensorData.map((sensor) => {
+      const status = sensor.fire_level > 0 ? "Danger" : "Attention";
+      return {
+        id: sensor.id,
+        sensor_name: sensor.sensor_name,
+        sensor_type: sensor.sensor_type,
+        smoke_value: sensor.smoke_value,
+        fire_level: sensor.fire_level,
+        location: sensor.location,
+        createdAt: sensor.createdAt,
+        updatedAt: sensor.updatedAt,
+        status: status,
+      };
+    });
+
+    res.status(200).json({
+      message: "Data sensor berhasil diambil",
+      data: sensorDataWithStatus,
+    });
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    console.error("Error getting sensor data:", error);
+    res
+      .status(500)
+      .json({ error: "Terjadi kesalahan saat mengambil data sensor" });
   }
 };
