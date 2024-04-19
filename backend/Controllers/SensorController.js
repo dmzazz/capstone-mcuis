@@ -21,8 +21,7 @@ export const SaveSensorData = async (req, res) => {
       status,
     });
 
-    newSensorData.status =
-      fire_level > 0 ? "Dangerous Fire Detected" : "Smoke Detected";
+    newSensorData.status = fire_level > 0 ? "Danger" : "Attention";
 
     // Memanggil fungsi HandleSensorDetection dengan data sensor yang baru disimpan
     await HandleSensorDetection(newSensorData);
