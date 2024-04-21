@@ -11,7 +11,7 @@ import {
 import LogoIcon from '../../assets/logo-icon.svg';
 import Search from '../../assets/search.svg';
 
-const HeaderHistory = () => {
+const HeaderHistory = ({searchQuery, setSearchQuery}) => {
   const [showSearch, setShowSearch] = useState(false);
   const inputRef = useRef(null);
 
@@ -49,6 +49,8 @@ const HeaderHistory = () => {
                 ref={inputRef}
                 placeholder="Search..."
                 autoFocus={true}
+                value={searchQuery}
+                onChangeText={setSearchQuery}
                 className="bg-gray-100 mr-5 px-4 rounded-lg"
               />
             </View>

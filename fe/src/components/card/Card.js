@@ -1,10 +1,11 @@
 import {Text, View} from 'react-native';
+import moment from 'moment';
 
 // Import icon
 import AttentionSvg from '../../assets/attention.svg';
 import ClockSvg from '../../assets/clock.svg';
 
-const Card = ({status, time, smoke, fire}) => {
+const Card = ({status, time, location, day, smoke, fire}) => {
   return (
     <>
       <View
@@ -13,20 +14,28 @@ const Card = ({status, time, smoke, fire}) => {
         <View>
           <View className="flex-row items-center">
             <AttentionSvg />
+            <Text className="text-yellow-500 font-bold ml-2">{location}</Text>
+          </View>
+          <View className="flex-row items-center my-1">
+            <AttentionSvg />
             <Text className="text-yellow-500 text-lg font-bold ml-2">
               {status}
             </Text>
           </View>
           <View className="flex-row items-center">
             <ClockSvg />
-            <Text className="text-black text-lg font-bold ml-2">{time}</Text>
+            <Text className="text-black font-bold ml-2">
+              {moment(time).format('LT')}
+            </Text>
           </View>
         </View>
         <View>
           <View>
-            <Text className="text-black">Sunday, 14 Januari 2024</Text>
+            <Text className="text-black">
+              {moment(day).format('dddd, DD MMMM YYYY')}
+            </Text>
           </View>
-          <View className="w-full mt-1 rounded-md">
+          <View className="w-full rounded-md">
             <Text className="text-black font-bold">
               <Text className="text-yellow-500">Smoke</Text> : {smoke}
             </Text>

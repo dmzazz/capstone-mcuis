@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Text, View, Image} from 'react-native';
+import {getCurrentTime} from '../../../utils/dateUtils';
 
 // Import component
 import {AllowPermission} from '../../allow-permission/AllowPermission';
@@ -15,6 +16,16 @@ const User = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(true);
   const [status, setStatus] = useState('normal');
   const [showAlert, setShowAlert] = useState(false);
+
+  const [currentTime, setCurrentTime] = useState('');
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(getCurrentTime()); // Gunakan utilitas getCurrentTime
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -69,7 +80,7 @@ const User = ({navigation}) => {
                 <Image source={statusIcon} className="ml-1 mt-2" />
               </View>
               <View className="min-w-[150]">
-                <Text>24 Feb 2024, 20.01 WIB</Text>
+                <Text>{currentTime}</Text>
               </View>
             </View>
             <View className="bg-[#FFCF96] min-w-[150] mb-4 p-1.5 rounded-lg">
@@ -115,7 +126,9 @@ const User = ({navigation}) => {
             </Text>{' '}
             to see details
           </Text>
-          <CarouselCardItem/>
+
+          {/* Carousel */}
+          <CarouselCardItem />
         </View>
 
         {/* Modal Allow Permission */}

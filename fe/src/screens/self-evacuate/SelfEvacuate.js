@@ -69,7 +69,7 @@ const SelfEvacuate = ({navigation}) => {
             {steps.map((step, index) => (
               <View
                 key={index}
-                className="bg-white w-80 mb-4 px-10 py-3 flex-row items-center rounded-lg"
+                className="bg-white w-80 mb-2 px-10 py-3 flex-row items-center rounded-lg"
                 style={{elevation: 5}}>
                 {step.icon}
                 <Text className="ml-2 text-black font-bold">{step.text}</Text>
