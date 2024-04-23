@@ -11,13 +11,47 @@ import HeaderHome from '../../header-home/HeaderHome';
 // Import SVG
 import HeaderImageMain from '../../../assets/header-main.svg';
 import CarouselCardItem from '../../carousel/CarouselCardItem';
+import axios from 'axios';
 
 const User = ({navigation}) => {
-  const [modalVisible, setModalVisible] = useState(true);
   const [status, setStatus] = useState('normal');
+  const [lastFetchTime, setLastFetchTime] = useState(Date.now());
   const [showAlert, setShowAlert] = useState(false);
 
   const [currentTime, setCurrentTime] = useState('');
+
+  // Untuk menemukan apakah data baru berdasarkan waktu saat ini
+  const isNewData = createdAt => {
+    const dataTime = new Date(createdAt).getTime();
+    return dataTime > lastFetchTime;
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      axios
+        .get('http://10.127.12.146:5000/api/v1/sensor/')
+        .then(response => {
+          const data = response.data.data;
+          if (data.length > 0) {
+            const latestData = data[data.length - 1]; // assuming the latest data is at the end
+            if (isNewData(latestData.createdAt)) {
+              setLastFetchTime(Date.now()); // update data terakhir yang diambil berdasarkan waktu saat ini
+              setStatus(latestData.status); // update status berdasarkan data terakhir
+            }
+          }
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    }, 1000); // fetch every second
+
+    const timeout = setTimeout(() => {
+      setStatus('normal'); // Kembali ke status normal jika tidak ada data terbaru
+    }, 10000);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
+  }, [status]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -26,18 +60,6 @@ const User = ({navigation}) => {
 
     return () => clearInterval(interval);
   }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowAlert(true);
-    }, 10000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const closeModal = () => {
-    setModalVisible(false);
-  };
 
   // Function to render image and text based on status
   const renderStatus = () => {
@@ -103,15 +125,12 @@ const User = ({navigation}) => {
         <View className="absolute z-50">
           <HeaderImageMain className="top-0 " />
         </View>
-
         {/* Header */}
         <HeaderHome />
-
         {/* Banner */}
         <View className="w-full bg-white px-4 py-5" style={{elevation: 2}}>
           {renderStatus()}
         </View>
-
         {/* Self Evacuation */}
         <Text className="text-black text-xl font-bold ml-2 mt-5 mb-1">
           Self Evacuation
@@ -121,7 +140,7 @@ const User = ({navigation}) => {
           <Text className="text-black">
             <Text
               className="text-[#FFD233]"
-              onPress={() => navigation.navigate('SelfEvacuate')}>
+              onPress={() => navigation.navigate('EarlyWarning')}>
               Click here
             </Text>{' '}
             to see details
@@ -130,17 +149,16 @@ const User = ({navigation}) => {
           {/* Carousel */}
           <CarouselCardItem />
         </View>
-
         {/* Modal Allow Permission */}
-        <View className="flex-1 justify-center items-center">
+        {/* <View className="flex-1 justify-center items-center">
           <AllowPermission
             modalVisible={modalVisible}
             closeModal={closeModal}
           />
-        </View>
-
-        {/* Alert */}
-        {/* {showAlert && <AlertUser navigation={navigation} />} */}
+        </View> */}
+        {/* Alert
+        Jika status danger tampilkan Alert User */}
+        {status === 'danger' && <AlertUser navigation={navigation} />}
       </View>
     </>
   );

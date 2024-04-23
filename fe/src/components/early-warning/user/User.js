@@ -106,15 +106,17 @@ const User = ({navigation}) => {
                   className="mx-2"
                 />
               </TouchableOpacity>
-              <View
-                className="w-32 rounded-xl overflow-hidden"
-                style={{elevation: 5}}>
-                <Button
-                  title="see hotspot"
-                  color="#FFA447"
-                  onPress={() => navigation.navigate('Hotspot')}
-                />
-              </View>
+              <TouchableOpacity>
+                <View
+                  className="w-32 rounded-xl overflow-hidden"
+                  style={{elevation: 5}}>
+                  <Button
+                    title="see hotspot"
+                    color="#FFA447"
+                    onPress={() => navigation.navigate('Hotspot')}
+                  />
+                </View>
+              </TouchableOpacity>
             </View>
           </View>
 

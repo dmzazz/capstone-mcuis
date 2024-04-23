@@ -2,7 +2,6 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import Home from '../screens/home-page/Home';
 import History from '../screens/history-fire/History';
-import RuteEvacuate from '../screens/rute-evacuate/RuteEvacuate';
 import Profile from '../screens/profile/Profile';
 import {Image} from 'react-native';
 
@@ -39,31 +38,25 @@ const BottomNav = () => {
           return (
             <Image
               source={iconSource}
-              style={{padding: 16, width: 26, height: 24, tintColor: tintColor}}
+              style={{padding: 18, width: 26, height: 24, tintColor: tintColor}}
             />
           );
         },
-      })}
-      // tabBarOptions={{
-      //   style: {height: 90, paddingBottom: 15},
-      //   labelStyle: {display: 'none'},
-      // }}
-    >
-      <Tab.Screen name="Home" component={Home} options={{headerShown: false}} />
-      {/* <Tab.Screen
-        name="RuteEvacuate"
-        component={RuteEvacuate}
-        options={{headerShown: false}}
-      /> */}
+      })}>
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{headerShown: false, tabBarShowLabel: false}}
+      />
       <Tab.Screen
         name="History"
         component={History}
-        options={{headerShown: false}}
+        options={{headerShown: false, tabBarShowLabel: false}}
       />
       <Tab.Screen
         name="Profile"
         component={Profile}
-        options={{headerShown: false}}
+        options={{headerShown: false, tabBarShowLabel: false}}
       />
     </Tab.Navigator>
   );

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import 'react-native-gesture-handler';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {decode as base64Decode} from 'base-64';
 
 // Import AsyncStorage
@@ -11,6 +12,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Login from './screens/login/Login';
 import Hotspot from './screens/hotspot/Hotspot';
 import EarlyWarning from './screens/early-warning/EarlyWarning';
+import RuteEvacuate from './screens/rute-evacuate/RuteEvacuate';
 import SelfEvacuate from './screens/self-evacuate/SelfEvacuate';
 import BottomNav from './navigation/BottomNav';
 
@@ -58,35 +60,42 @@ const App = () => {
   // };
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Main"
-          component={BottomNav}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="EarlyWarning"
-          component={EarlyWarning}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Hotspot"
-          component={Hotspot}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="SelfEvacuate"
-          component={SelfEvacuate}
-          options={{headerShown: false}}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <GestureHandlerRootView>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Main"
+            component={BottomNav}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="RuteEvacuate"
+            component={RuteEvacuate}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="EarlyWarning"
+            component={EarlyWarning}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Hotspot"
+            component={Hotspot}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="SelfEvacuate"
+            component={SelfEvacuate}
+            options={{headerShown: false}}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 };
 

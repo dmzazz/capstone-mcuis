@@ -15,27 +15,45 @@ const History = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    axios
-      .get('http://10.127.12.199:5000/api/v1/sensor/')
-      .then(response => {
-        setData(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error.message);
-      });
+    const fetchData = () => {
+      axios
+        .get('http://10.127.12.146:5000/api/v1/sensor/')
+        .then(response => {
+          setData(response.data.data);
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error.message);
+          setData([]); // Ensure data is initialized as an empty array in case of error
+        });
+    };
+
+    // Fetch data initially
+    fetchData();
+
+    // Fetch data every 5 minutes (300000 milliseconds)
+    const interval = setInterval(fetchData, 3000);
+
+    // Cleanup function to clear interval when component unmounts
+    return () => clearInterval(interval);
   }, []);
 
-  const filteredData = searchQuery
-    ? data.filter(
-        item =>
-          (item.location &&
-            item.location.toLowerCase().includes(searchQuery.toLowerCase())) ||
-          (item.status &&
-            item.status.toLowerCase().includes(searchQuery.toLowerCase())) ||
-          (item.createdAt &&
-            item.createdAt.toLowerCase().includes(searchQuery.toLowerCase())),
-      )
-    : data;
+  // Ensure filteredData is always an array
+  const filteredData = Array.isArray(data)
+    ? searchQuery
+      ? data.filter(
+          item =>
+            (item.location &&
+              item.location
+                .toLowerCase()
+                .includes(searchQuery.toLowerCase())) ||
+            (item.status &&
+              item.status.toLowerCase().includes(searchQuery.toLowerCase())) ||
+            (item.createdAt &&
+              item.createdAt.toLowerCase().includes(searchQuery.toLowerCase())),
+        )
+      : data
+    : [];
 
   return (
     <>

@@ -1,4 +1,4 @@
-import {Text, View} from 'react-native';
+import {Image, Text, View} from 'react-native';
 import moment from 'moment';
 
 // Import icon
@@ -6,6 +6,14 @@ import AttentionSvg from '../../assets/attention.svg';
 import ClockSvg from '../../assets/clock.svg';
 
 const Card = ({status, time, location, day, smoke, fire}) => {
+  // Determine text color based on status
+  const textColor =
+    status === 'danger'
+      ? 'text-red-500'
+      : status === 'attention'
+      ? 'text-yellow-500'
+      : 'text-black';
+
   return (
     <>
       <View
@@ -13,14 +21,12 @@ const Card = ({status, time, location, day, smoke, fire}) => {
         style={{elevation: 5}}>
         <View>
           <View className="flex-row items-center">
-            <AttentionSvg />
-            <Text className="text-yellow-500 font-bold ml-2">{location}</Text>
+            <Image source={require('../../assets/location-icon.png')} />
+            <Text className={`text-black font-bold ml-2`}>{location}</Text>
           </View>
           <View className="flex-row items-center my-1">
             <AttentionSvg />
-            <Text className="text-yellow-500 text-lg font-bold ml-2">
-              {status}
-            </Text>
+            <Text className={`${textColor} capitalize font-bold ml-2`}>{status}</Text>
           </View>
           <View className="flex-row items-center">
             <ClockSvg />
