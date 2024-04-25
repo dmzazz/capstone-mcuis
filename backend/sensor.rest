@@ -4,15 +4,11 @@ Content-Type: application/json
 {
     "sensor_name": "Sensor 2",
     "sensor_type": "api",
-    "fire_level": 0,
-    "smoke_value": 1,
+    "fire_level": 1,
+    "smoke_value": 0,
     "location": "Warehouse 2"
 }
 
 ###
-GET http://localhost:5000/api/v1/sensor/
-Content-Type: application/json
 
-{
-
-}
+###

@@ -1,7 +1,5 @@
 import Database from "../Config/Database.js";
-import { Sequelize } from "sequelize";
-
-const { DataTypes } = Sequelize;
+import { DataTypes } from "sequelize";
 
 const UserModel = Database.define(
   "user",
@@ -29,6 +27,17 @@ const UserModel = Database.define(
     role: {
       type: DataTypes.ENUM("admin", "user", "firefighter"),
       allowNull: false,
+    },
+    status: {
+      type: DataTypes.STRING,
+    },
+    emergency_message: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    confirmation_status: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   },
   {

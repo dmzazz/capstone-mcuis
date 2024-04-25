@@ -1,6 +1,6 @@
 import Database from "../Config/Database.js";
-import UserModel from "./UserModel.js";
 import { DataTypes } from "sequelize";
+import UserModel from "./UserModel.js";
 
 const FireFighterModel = Database.define("fire_fighter", {
   id: {
@@ -24,12 +24,12 @@ const FireFighterModel = Database.define("fire_fighter", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  user_id: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: UserModel,
-      key: "id",
-    },
+  notification_message: {
+    type: DataTypes.TEXT,
+    allowNull: true,
   },
 });
+
+FireFighterModel.belongsTo(UserModel);
+
 export default FireFighterModel;

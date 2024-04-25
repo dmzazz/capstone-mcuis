@@ -2,20 +2,19 @@ POST http://localhost:5000/api/v1/users/
 Content-Type: application/json
 
 {
-    "nama": "Wendy",
-    "email": "wendy@admin.com",
-    "password": "wendy",
-    "confirmPassword": "wendy",
-    "role": "admin"
+    "nama": "firefighter",
+    "email": "firefighter@firefighter.com",
+    "password": "firefighter",
+    "confirmPassword": "firefighter",
+    "role": "firefighter",
+    
 }
 
 
 
 ###
 GET http://localhost:5000/api/v1/users/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxMzQwMTM2NiwiZXhwIjoxNzEzNDAxMzg2fQ.j3grvhRSrDNkZlTP0Q1dq0FY1PtFWvqFmpOGOl70h1w
-
-
+Authorization: Bearerey eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcxMzgzODA1MiwiZXhwIjoxNzEzODM5MDUyfQ.lYW8CiEyMZ5TQeFc1ESLnPePWHRYfEaJyJA9a1yEZF8
  
 ###
 POST http://localhost:5000/api/v1/login
@@ -23,7 +22,7 @@ Content-Type: application/json
 
 {
     "email": "wendy@admin.com",
-    "password": "wendy"
+    "password": "dimas123"
 }
 
 ###
@@ -40,4 +39,22 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:5000/api/v1/logout
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcxMzQwNDkyNywiZXhwIjoxNzEzNDA1OTI3fQ.ylGL1xYeJsZQCOpIDlrMnnZa_kKHTrDwTx1cqB38qRs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcxMzkyMDg0NCwiZXhwIjoxNzEzOTIxODQ0fQ._oLwAjMV_AcKsCWU3gZKP8lVbJfU20BvjPFOfX4E_5g
+
+###
+POST http://localhost:5000/api/v1/sos/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNDAwNzU5NSwiZXhwIjoxNzE0MDA4NTk1fQ.1ycfmSQ8CkTIlsZpqJ3nZ2g081CRfdwjwGdCjXvEQz0
+Content-Type: application/json
+
+ {
+  "firefighterId": 8,
+  "message": "Emergency SOS Boys"
+}
+
+###
+GET http://localhost:5000/api/v1/user/notification/3
+Content-Type: application/json
+
+{
+
+}

@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import UserModel from "../Models/UserModel.js";
+import FireFighterModel from "../Models/FireFighterModel.js";
 
 export const getUsers = async (req, res) => {
   try {
@@ -168,5 +169,45 @@ export const changePassword = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: "Failed to change password" });
+  }
+};
+
+// SOS Function send to FireFighter
+export const SosSendToFireFighter = async (req, res) => {
+  try {
+    const { firefighterId, message } = req.body;
+
+    // Temukan pemadam kebakaran berdasarkan firefighterId
+    const firefighter = await FireFighterModel.findByPk(firefighterId);
+    if (!firefighter) {
+      return res.status(404).json({ error: "Firefighter not found" });
+    }
+
+    // Perbarui notification message di FireFighterModel
+    firefighter.notification_message = message;
+    await firefighter.save();
+
+    return res
+      .status(200)
+      .json({ message: "Notification sent to firefighter successfully" });
+  } catch (error) {
+    console.error("Error sending notification:", error);
+    return res.status(500).json({ error: "Failed to send notification" });
+  }
+};
+
+//get confirmation_status from tabel user
+
+export const GetNotificationMessage = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await UserModel.findByPk(id);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.status(200).json(user.confirmation_status);
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    res.status(500).json({ error: "Failed to fetch user" });
   }
 };
