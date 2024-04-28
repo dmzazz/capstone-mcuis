@@ -17,10 +17,10 @@ const History = () => {
   useEffect(() => {
     const fetchData = () => {
       axios
-        .get('http://10.127.12.146:5000/api/v1/sensor/')
+        .get('http://192.168.1.28:5000/api/v1/sensor/')
         .then(response => {
           setData(response.data.data);
-          console.log(response.data);
+          // console.log(response.data);
         })
         .catch(error => {
           console.error('Error fetching data:', error.message);

@@ -55,7 +55,7 @@ const Login = () => {
   //   try {
   //     const accessToken = AsyncStorage.getItem('accessToken');
   //     const response = await axios.get(
-  //       'http://10.127.12.146:5000/api/v1/users',
+  //       'http://192.168.1.28:5000/api/v1/users',
   //       {
   //         headers: {
   //           Authorization: `Bearer ${accessToken}`,
@@ -81,7 +81,7 @@ const Login = () => {
   //     const currentDate = new currentDate();
   //     if (expire * 1000 < currentDate.getTime()) {
   //       const response = await axios.get(
-  //         'http://10.127.12.146:5000/api/v1/users',
+  //         'http://192.168.1.28:5000/api/v1/users',
   //       );
   //       config.headers.Authorization = `Bearer ${response.data.accessToken}`;
   //       setAccessToken(response.data.accessToken);
@@ -116,7 +116,7 @@ const Login = () => {
 
       // No need for Authorization header in login request
       const response = await axios.post(
-        'http://10.127.12.146:5000/api/v1/login',
+        'http://192.168.1.28:5000/api/v1/login',
         {
           email,
           password,

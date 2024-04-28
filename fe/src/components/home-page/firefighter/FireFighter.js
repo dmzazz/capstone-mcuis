@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, Text, View} from 'react-native';
 
 // Icon SVG
@@ -29,6 +29,40 @@ const FireFighter = ({navigation}) => {
       text: 'Confirmation send to user',
     },
   ];
+
+  const [showAlert, setShowAlert] = useState(false);
+  const [lastFetchTime, setLastFetchTime] = useState(Date.now());
+
+  const isNewData = updatedAt => {
+    const dataTime = new Date(updatedAt).getTime();
+    return dataTime > lastFetchTime;
+  };
+
+  useEffect(() => {
+    const fetchNotificationMessage = async () => {
+      try {
+        const response = await fetch(
+          'http://192.168.1.28:5000/api/v1/firefighter/notification/8',
+        );
+        const notification = await response.json();
+        // console.log(notification);
+        if (isNewData(notification.updatedAt)) {
+          setLastFetchTime(Date.now()); // update data terakhir yang diambil berdasarkan waktu saat ini
+          setShowAlert(true); // update status berdasarkan data terakhir
+        }
+      } catch (error) {
+        console.error('Error fetching notification:', error);
+      }
+    };
+
+    // Call the function to check for notifications when the component mounts
+    const intervalId = setInterval(fetchNotificationMessage, 1000); // Fetch every second
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
   return (
     <>
       <View>
@@ -77,7 +111,7 @@ const FireFighter = ({navigation}) => {
         </View>
       </View>
 
-      <AlertFireFighter navigation={navigation} />
+      {showAlert && <AlertFireFighter navigation={navigation} />}
     </>
   );
 };

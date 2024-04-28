@@ -1,19 +1,57 @@
 import React from 'react';
-import {View, Text, Image, FlatList, SectionList, Button} from 'react-native';
+import {View, Text, Image, Button} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {
+  ALERT_TYPE,
+  AlertNotificationRoot,
+  Toast,
+} from 'react-native-alert-notification';
 
 // Import SVG
 import HeaderSvg from '../../../assets/early-warning/header.svg';
 import MainSvg from '../../../assets/early-warning/main.svg';
 import FooterSvg from '../../../assets/early-warning/footer.svg';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const FireFighter = ({navigation}) => {
+  const handleSendConfirmation = async () => {
+    try {
+      // Menunggu hasil dari AsyncStorage untuk mendapatkan token secara asinkron
+      const token = await AsyncStorage.getItem('accessToken');
+
+      const response = await fetch(
+        'http://192.168.1.28:5000/api/v1/firefighter/confirmation/3',
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({confirmation_status: 'confirmed'}),
+        },
+      );
+      const data = await response.json();
+      if (response.status === 200) {
+        console.log(data); // Cetak respons dari server
+        Toast.show({
+          type: ALERT_TYPE.SUCCESS,
+          title: 'Success',
+          textBody: data.message,
+        });
+      } else {
+        console.error('Failed to send confirmation');
+      }
+    } catch (error) {
+      console.error('Error sending confirmation:', error);
+    }
+  };
   return (
     <>
       <LinearGradient
         start={{x: 0, y: 0}}
         end={{x: 1, y: 1}}
         colors={['#F94A29', '#F94C10', '#FF1E00']}>
+        <AlertNotificationRoot />
         <View className="w-full h-full">
           {/* Header SVG*/}
           <HeaderSvg />
@@ -59,7 +97,7 @@ const FireFighter = ({navigation}) => {
                 <Button
                   title="confimation"
                   color="#4ECB71"
-                  onPress={() => navigation.navigate('RuteEvacuate')}
+                  onPress={() => handleSendConfirmation()}
                 />
               </View>
             </View>

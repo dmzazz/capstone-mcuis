@@ -29,7 +29,7 @@ const User = ({navigation}) => {
   useEffect(() => {
     const interval = setInterval(() => {
       axios
-        .get('http://10.127.12.146:5000/api/v1/sensor/')
+        .get('http://192.168.1.28:5000/api/v1/sensor/')
         .then(response => {
           const data = response.data.data;
           if (data.length > 0) {
@@ -42,6 +42,12 @@ const User = ({navigation}) => {
         })
         .catch(error => console.error('Error fetching data:', error));
     }, 1000); // fetch every second
+
+    if (status === 'danger') {
+      alertTimeout = setTimeout(() => {
+        setShowAlert(true);
+      }, 5000); // Display alert after 5 seconds
+    }
 
     const timeout = setTimeout(() => {
       setStatus('normal'); // Kembali ke status normal jika tidak ada data terbaru
@@ -158,7 +164,7 @@ const User = ({navigation}) => {
         </View> */}
         {/* Alert
         Jika status danger tampilkan Alert User */}
-        {status === 'danger' && <AlertUser navigation={navigation} />}
+        {showAlert && <AlertUser navigation={navigation} />}
       </View>
     </>
   );

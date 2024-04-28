@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Image, Text, TextInput, View} from 'react-native';
+import {Button, Text, TextInput, View} from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
@@ -43,7 +43,7 @@ const Profile = ({navigation}) => {
     try {
       const accessToken = await AsyncStorage.getItem('accessToken');
       const response = await axios.put(
-        'http://192.168.137.86:5000/api/v1/change-password',
+        'http://192.168.1.28:5000/api/v1/change-password',
         {
           oldPassword,
           newPassword,
@@ -75,7 +75,7 @@ const Profile = ({navigation}) => {
   // Handle Logout
   const handleLogout = async () => {
     try {
-      await axios.delete('http://192.168.137.86:5000/api/v1/logout');
+      await axios.delete('http://192.168.1.28:5000/api/v1/logout');
       // Hapus token sebelum navigasi ke halaman login
       await AsyncStorage.removeItem('accessToken');
       navigation.navigate('Login');
