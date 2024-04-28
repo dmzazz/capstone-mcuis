@@ -177,14 +177,18 @@ export const SosSendToFireFighter = async (req, res) => {
   try {
     const { firefighterId, message } = req.body;
 
-    // Temukan pemadam kebakaran berdasarkan firefighterId
     const firefighter = await FireFighterModel.findByPk(firefighterId);
     if (!firefighter) {
       return res.status(404).json({ error: "Firefighter not found" });
     }
 
-    // Perbarui notification message di FireFighterModel
+    // Update confirmation status and timestamps
     firefighter.notification_message = message;
+    firefighter.confirmation_status = "confirmed"; // Set confirmation status
+    firefighter.confirmed_at = new Date(); // Set confirmed timestamp
+    firefighter.confirmation_updated_at = new Date(); // Set confirmation updated timestamp
+
+    // Save the firefighter details
     await firefighter.save();
 
     return res

@@ -2,11 +2,11 @@ POST http://localhost:5000/api/v1/users/
 Content-Type: application/json
 
 {
-    "nama": "firefighter",
-    "email": "firefighter@firefighter.com",
-    "password": "firefighter",
-    "confirmPassword": "firefighter",
-    "role": "firefighter",
+    "nama": "dimas",
+    "email": "dimas@firefighter.com",
+    "password": "dimas",
+    "confirmPassword": "dimas",
+    "role": "user"
     
 }
 
@@ -21,8 +21,8 @@ POST http://localhost:5000/api/v1/login
 Content-Type: application/json
 
 {
-    "email": "wendy@admin.com",
-    "password": "dimas123"
+    "email": "dimas@firefighter.com",
+    "password": "dimas"
 }
 
 ###
@@ -43,7 +43,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhd
 
 ###
 POST http://localhost:5000/api/v1/sos/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNDAwNzU5NSwiZXhwIjoxNzE0MDA4NTk1fQ.1ycfmSQ8CkTIlsZpqJ3nZ2g081CRfdwjwGdCjXvEQz0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNDIwMTA1NywiZXhwIjoxNzE0MjAyMDU3fQ.wZsWkYCsGrl4hDKwVrFUrowLP5SAF0nAvb2SG-1b_3A
 Content-Type: application/json
 
  {

@@ -28,6 +28,14 @@ const FireFighterModel = Database.define("fire_fighter", {
     type: DataTypes.TEXT,
     allowNull: true,
   },
+  confirmed_at: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  },
+  confirmation_updated_at: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  },
 });
 
 FireFighterModel.belongsTo(UserModel);

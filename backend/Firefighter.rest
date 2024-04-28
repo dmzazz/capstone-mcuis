@@ -12,7 +12,7 @@ Content-Type: application/json
 ###
 
 POST http://localhost:5000/api/v1/firefighter/confirmation/3
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxMzk3MjIwNiwiZXhwIjoxNzEzOTczMjA2fQ.LQHlF6x7B84PXv41ctB-gtPzAO4iLw63vGxyRml1_PY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTcxNDI4Njc5NiwiZXhwIjoxNzE0Mjg3Nzk2fQ.hiTfiLpe37ygnkq8xJ9nP8p3nZJeVVsffMGsGebYYqE
 Content-Type: application/json
 
 {

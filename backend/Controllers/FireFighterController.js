@@ -82,7 +82,6 @@ export const DeleteFireFighter = async (req, res) => {
 
 export const SendConfirmation = async (req, res) => {
   try {
-    const { confirmation_status } = req.body;
     const { userId } = req.params;
 
     const user = await UserModel.findByPk(userId);
@@ -90,7 +89,12 @@ export const SendConfirmation = async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    user.confirmation_status = confirmation_status; // Menggunakan confirmation_status dari req.body
+    // Update confirmation status and timestamps
+    user.confirmation_status = "confirmed"; // Menggunakan konfirmasi otomatis
+    user.confirmed_at = new Date(); // Set confirmed timestamp
+    user.confirmation_updated_at = new Date(); // Set confirmation updated timestamp
+
+    // Save the user details
     await user.save();
 
     return res.status(200).json({ message: "Confirmation sent successfully" });

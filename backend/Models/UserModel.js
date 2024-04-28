@@ -39,6 +39,14 @@ const UserModel = Database.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    confirmed_at: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    confirmation_updated_at: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
   },
   {
     freezeTableName: true,
