@@ -62,21 +62,13 @@ export const Login = async (req, res) => {
     }
 
     // Membuat token akses
-    const accessToken = jwt.sign(
-      { userId: user.id },
-      process.env.ACCESS_TOKEN_SECRET,
-      {
-        expiresIn: "1000s",
-      }
-    );
+    const accessToken = jwt.sign({ userId: user.id }, process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: "1000s",
+    });
 
-    const refreshToken = jwt.sign(
-      { userId: user.id },
-      process.env.REFRESH_TOKEN_SECRET,
-      {
-        expiresIn: "1d",
-      }
-    );
+    const refreshToken = jwt.sign({ userId: user.id }, process.env.REFRESH_TOKEN_SECRET, {
+      expiresIn: "1d",
+    });
     await UserModel.update(
       { refresh_token: refreshToken },
       {
@@ -191,9 +183,7 @@ export const SosSendToFireFighter = async (req, res) => {
     // Save the firefighter details
     await firefighter.save();
 
-    return res
-      .status(200)
-      .json({ message: "Notification sent to firefighter successfully" });
+    return res.status(200).json({ message: "Notification sent to firefighter successfully" });
   } catch (error) {
     console.error("Error sending notification:", error);
     return res.status(500).json({ error: "Failed to send notification" });
@@ -209,7 +199,7 @@ export const GetNotificationMessage = async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-    res.status(200).json(user.confirmation_status);
+    res.status(200).json({ confirmation_status: user.confirmation_status, confirmation_updated_at: user.confirmation_updated_at });
   } catch (error) {
     console.error("Error fetching user:", error);
     res.status(500).json({ error: "Failed to fetch user" });

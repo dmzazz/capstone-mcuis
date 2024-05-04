@@ -113,7 +113,7 @@ export const GetNotificationMessage = async (req, res) => {
     if (!fireFighter) {
       return res.status(404).json({ error: "Fire fighter not found" });
     }
-    res.status(200).json(fireFighter.notification_message);
+    res.status(200).json({ notification_message: fireFighter.notification_message, updatedAt: fireFighter.updatedAt });
   } catch (error) {
     console.error("Error fetching fire fighter:", error);
     res.status(500).json({ error: "Failed to fetch fire fighter" });

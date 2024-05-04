@@ -3,14 +3,7 @@ import { HandleSensorDetection } from "../Controllers/FireEventController.js";
 
 export const SaveSensorData = async (req, res) => {
   try {
-    const {
-      sensor_name,
-      sensor_type,
-      fire_level,
-      smoke_value,
-      location,
-      status,
-    } = req.body;
+    const { sensor_name, sensor_type, fire_level, smoke_value, location, status } = req.body;
 
     const newSensorData = await FireSensorModel.create({
       sensor_name,
@@ -33,9 +26,7 @@ export const SaveSensorData = async (req, res) => {
     });
   } catch (error) {
     console.error("Error saving sensor data:", error);
-    res
-      .status(500)
-      .json({ error: "Terjadi kesalahan saat menyimpan data sensor" });
+    res.status(500).json({ error: "Terjadi kesalahan saat menyimpan data sensor" });
   }
 };
 
@@ -66,8 +57,6 @@ export const GetSensorData = async (req, res) => {
     });
   } catch (error) {
     console.error("Error getting sensor data:", error);
-    res
-      .status(500)
-      .json({ error: "Terjadi kesalahan saat mengambil data sensor" });
+    res.status(500).json({ error: "Terjadi kesalahan saat mengambil data sensor" });
   }
 };
