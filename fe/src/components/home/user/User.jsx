@@ -1,20 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import {Text, View, Image} from 'react-native';
-import {getCurrentTime} from '../../../utils/dateUtils';
+import {getCurrentTime} from '../../../utils/dateUtils.js';
+import axios from 'axios';
 
 // Import component
-import {AllowPermission} from '../../allow-permission/AllowPermission';
-import {CarouselSelfEvacuation} from '../../components/carousel/CarouselSelfEvacuation';
-import AlertUser from '../../alert-user/AlertUser';
-import HeaderHome from '../../header-home/HeaderHome';
+import AlertUser from '../../alert-user/AlertUser.jsx';
+import CarouselCardItem from '../../carousel/CarouselCardItem.jsx';
+import HeaderHome from '../../header/Header.jsx';
 
 // Import SVG
 import HeaderImageMain from '../../../assets/header-main.svg';
-import CarouselCardItem from '../../carousel/CarouselCardItem';
-import axios from 'axios';
 
 const User = ({navigation}) => {
-  const [status, setStatus] = useState('normal');
+  const [status, setStatus] = useState('Normal');
   const [lastFetchTime, setLastFetchTime] = useState(Date.now());
   const [showAlert, setShowAlert] = useState(false);
 
@@ -29,7 +27,7 @@ const User = ({navigation}) => {
   useEffect(() => {
     const interval = setInterval(() => {
       axios
-        .get('http://192.168.1.28:5000/api/v1/sensor/')
+        .get('http://192.168.1.10:5000/api/v1/sensor/')
         .then(response => {
           const data = response.data.data;
           if (data.length > 0) {
@@ -37,20 +35,21 @@ const User = ({navigation}) => {
             if (isNewData(latestData.createdAt)) {
               setLastFetchTime(Date.now()); // update data terakhir yang diambil berdasarkan waktu saat ini
               setStatus(latestData.status); // update status berdasarkan data terakhir
+              console.log(latestData.status);
             }
           }
         })
         .catch(error => console.error('Error fetching data:', error));
     }, 1000); // fetch every second
 
-    if (status === 'danger') {
+    if (status === 'Danger') {
       alertTimeout = setTimeout(() => {
         setShowAlert(true);
       }, 5000); // Display alert after 5 seconds
     }
 
     const timeout = setTimeout(() => {
-      setStatus('normal'); // Kembali ke status normal jika tidak ada data terbaru
+      setStatus('Normal'); // Kembali ke status normal jika tidak ada data terbaru
     }, 10000);
 
     return () => {
@@ -71,22 +70,22 @@ const User = ({navigation}) => {
   const renderStatus = () => {
     let statusTitle, statusIcon, statusText, imageSource, statusTitleColor;
     switch (status) {
-      case 'normal':
-        statusTitle = 'Normal';
+      case 'Normal':
+        statusTitle = 'normal';
         statusTitleColor = 'text-green-500';
         statusIcon = require('../../../assets/smile-icon.png');
         statusText = 'Situation is safe, have a nice day';
         imageSource = require('../../../assets/situation/normal.png');
         break;
-      case 'attention':
-        statusTitle = 'Attention';
+      case 'Attention':
+        statusTitle = 'attention';
         statusTitleColor = 'text-yellow-500';
         statusIcon = require('../../../assets/attention-icon.png');
         statusText = 'Smoke detected, please be careful';
         imageSource = require('../../../assets/situation/attention.png');
         break;
-      case 'danger':
-        statusTitle = 'Danger';
+      case 'Danger':
+        statusTitle = 'danger';
         statusTitleColor = 'text-red-500';
         statusIcon = require('../../../assets/danger-icon.png');
         statusText = 'Fire detected, evacuate immediately.';
@@ -146,7 +145,7 @@ const User = ({navigation}) => {
           <Text className="text-black">
             <Text
               className="text-[#FFD233]"
-              onPress={() => navigation.navigate('EarlyWarning')}>
+              onPress={() => navigation.navigate('SelfEvacuate')}>
               Click here
             </Text>{' '}
             to see details

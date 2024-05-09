@@ -13,14 +13,14 @@ import MainSvg from '../../../assets/early-warning/main.svg';
 import FooterSvg from '../../../assets/early-warning/footer.svg';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const FireFighter = ({navigation}) => {
+const FireFighter = () => {
   const handleSendConfirmation = async () => {
     try {
       // Menunggu hasil dari AsyncStorage untuk mendapatkan token secara asinkron
       const token = await AsyncStorage.getItem('accessToken');
 
       const response = await fetch(
-        'http://192.168.1.28:5000/api/v1/firefighter/confirmation/3',
+        'http://192.168.1.10:5000/api/v1/firefighter/confirmation/3',
         {
           method: 'POST',
           headers: {

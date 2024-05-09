@@ -16,7 +16,7 @@ import FooterSvg from '../../../assets/early-warning/footer.svg';
 
 const User = ({navigation}) => {
   const [lastFetchTime, setLastFetchTime] = useState(Date.now());
-  const [receiveConfirmation, setReceiveConfirmation] = useState('');
+  const [alertShown, setAlertShown] = useState(false); // Tambahkan state untuk melacak apakah alert baru saja ditampilkan
 
   const dataItem = [
     {
@@ -43,7 +43,7 @@ const User = ({navigation}) => {
       const token = await AsyncStorage.getItem('accessToken');
 
       // Mengirim permintaan ke server dengan token yang diperoleh
-      const response = await fetch('http://192.168.1.28:5000/api/v1/sos', {
+      const response = await fetch('http://192.168.1.10:5000/api/v1/sos', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -74,13 +74,11 @@ const User = ({navigation}) => {
     return dataTime > lastFetchTime;
   };
 
-  const [alertShown, setAlertShown] = useState(false); // Tambahkan state untuk melacak apakah alert baru saja ditampilkan
-
   useEffect(() => {
     const fetchNotificationMessage = async () => {
       try {
         const response = await fetch(
-          'http://192.168.1.28:5000/api/v1/user/notification/3',
+          'http://192.168.1.10:5000/api/v1/user/notification/3',
         );
         const notification = await response.json();
         console.log(notification);

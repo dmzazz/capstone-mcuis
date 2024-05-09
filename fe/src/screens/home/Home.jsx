@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Import component
-import User from '../../components/early-warning/user/User';
-import FireFighter from '../../components/early-warning/firefighter/FireFighter';
+import User from '../../components/home/user/User';
+import FireFighter from '../../components/home/firefighter/FireFighter';
 
-const EarlyWarning = ({navigation}) => {
+const Home = ({navigation}) => {
   const [role, setRole] = useState('');
 
   useEffect(() => {
@@ -18,16 +18,15 @@ const EarlyWarning = ({navigation}) => {
         console.error(error);
       }
     };
-    role();
-  }, []);
 
-  useEffect(() => {
     const token = async () => {
       const accessToken = await AsyncStorage.getItem('accessToken');
       if (!accessToken) {
         navigation.navigate('Login'); // Redirect ke screen login ketika tidak ada token
       }
     };
+
+    role();
     token();
   }, []);
 
@@ -39,4 +38,4 @@ const EarlyWarning = ({navigation}) => {
   );
 };
 
-export default EarlyWarning;
+export default Home;

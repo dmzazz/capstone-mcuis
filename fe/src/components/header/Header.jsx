@@ -3,7 +3,7 @@ import {Alert, Image, PermissionsAndroid, Text, View} from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const HeaderHome = () => {
+const Header = () => {
   const [status, setStatus] = useState('normal');
   const [city, setCity] = useState('');
   const [nama, setNama] = useState('');
@@ -131,4 +131,4 @@ const HeaderHome = () => {
   );
 };
 
-export default HeaderHome;
+export default Header;
