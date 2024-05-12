@@ -1,0 +1,14 @@
+POST http://localhost:5000/api/v1/sensor/
+Content-Type: application/json
+
+{
+    "sensor_name": "Sensor 2",
+    "sensor_type": "api",
+    "fire_level": 1,
+    "smoke_value": 0,
+    "location": "Warehouse 2"
+}
+
+###
+
+###

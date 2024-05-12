@@ -1,0 +1,31 @@
+POST http://localhost:5000/api/v1/firefighter/
+Content-Type: application/json
+
+{
+    "name": "dimasbomber",
+    "location": "Cikarang Timur",
+    "status": "Active",
+    "contact_number": "08123456789",
+    "userId": 4
+}
+
+###
+
+POST http://localhost:5000/api/v1/firefighter/confirmation/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTcxNDMwMDk4NywiZXhwIjoxNzE0MzAxOTg3fQ.ChxP0ArDpE8VU9siOd7P2fRl0i2gUjJF79vSqoE4FDo
+Content-Type: application/json
+
+{
+    
+    "confirmation_status": "Confirmed"
+
+}
+
+###
+
+GET http://localhost:5000/api/v1/firefighter/notification/8
+Content-Type: application/json
+
+{
+    
+}

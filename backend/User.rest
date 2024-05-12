@@ -1,0 +1,60 @@
+POST http://localhost:5000/api/v1/users/
+Content-Type: application/json
+
+{
+    "nama": "dimas",
+    "email": "dimas@firefighter.com",
+    "password": "dimas",
+    "confirmPassword": "dimas",
+    "role": "user"
+    
+}
+
+
+
+###
+GET http://localhost:5000/api/v1/users/
+Authorization: Bearerey eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcxMzgzODA1MiwiZXhwIjoxNzEzODM5MDUyfQ.lYW8CiEyMZ5TQeFc1ESLnPePWHRYfEaJyJA9a1yEZF8
+ 
+###
+POST http://localhost:5000/api/v1/login
+Content-Type: application/json
+
+{
+    "email": "dimas@firefighter.com",
+    "password": "dimas"
+}
+
+###
+PUT http://localhost:5000/api/v1/change-password
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxMzQyOTM5NCwiZXhwIjoxNzEzNDMwMzk0fQ.50YyqkXe56MRIYx51uRntpJJNgeYT3KAOpAJMwU6Bps
+Content-Type: application/json
+
+{
+    "oldPassword": "wendy",
+    "newPassword": "dimas123",
+    "confirmPassword": "dimas123"
+}
+
+
+###
+DELETE http://localhost:5000/api/v1/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcxMzkyMDg0NCwiZXhwIjoxNzEzOTIxODQ0fQ._oLwAjMV_AcKsCWU3gZKP8lVbJfU20BvjPFOfX4E_5g
+
+###
+POST http://localhost:5000/api/v1/sos/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTcxNDYxNzA0NiwiZXhwIjoxNzE0NjE4MDQ2fQ.kNz--Cg4HJlqWqD_GCP9WnN76tBvOzn_RoqgNau2iQo
+Content-Type: application/json
+
+ {
+  "firefighterId": 8,
+  "message": "Emergency SOS Boys"
+}
+
+###
+GET http://localhost:5000/api/v1/user/notification/3
+Content-Type: application/json
+
+{
+
+}
