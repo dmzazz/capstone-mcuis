@@ -22,7 +22,7 @@ Content-Type: application/json
 
 {
     "email": "dimas@firefighter.com",
-    "password": "dimas"
+    "password": "dimas1"
 }
 
 ###
@@ -43,7 +43,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhd
 
 ###
 POST http://localhost:5000/api/v1/sos/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTcxNDYxNzA0NiwiZXhwIjoxNzE0NjE4MDQ2fQ.kNz--Cg4HJlqWqD_GCP9WnN76tBvOzn_RoqgNau2iQo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTcxNTc0Njk3NiwiZXhwIjoxNzE1NzQ3OTc2fQ.hO28VMvdf1v1EX_4UV6P3L4wx7i2cNWu14MbBSaTkrk
 Content-Type: application/json
 
  {
