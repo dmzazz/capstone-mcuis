@@ -43,7 +43,7 @@ const User = ({navigation}) => {
       const token = await AsyncStorage.getItem('accessToken');
 
       // Mengirim permintaan ke server dengan token yang diperoleh
-      const response = await fetch('http://192.168.1.10:5000/api/v1/sos', {
+      const response = await fetch('http://192.168.1.16:5000/api/v1/sos', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -78,7 +78,7 @@ const User = ({navigation}) => {
     const fetchNotificationMessage = async () => {
       try {
         const response = await fetch(
-          'http://192.168.1.10:5000/api/v1/user/notification/3',
+          'http://192.168.1.16:5000/api/v1/user/notification/3',
         );
         const notification = await response.json();
         console.log(notification);

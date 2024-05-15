@@ -51,7 +51,7 @@ const Login = () => {
 
       // No need for Authorization header in login request
       const response = await axios.post(
-        'http://192.168.1.10:5000/api/v1/login',
+        'http://192.168.1.16:5000/api/v1/login',
         {
           email,
           password,
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
   footerImage: {
     position: 'absolute',
     bottom: 0,
-    zIndex: -1
+    zIndex: -1,
   },
 });
 

@@ -43,7 +43,7 @@ const Profile = ({navigation}) => {
     try {
       const accessToken = await AsyncStorage.getItem('accessToken');
       const response = await axios.put(
-        'http://192.168.1.10:5000/api/v1/change-password',
+        'http://192.168.1.16:5000/api/v1/change-password',
         {
           oldPassword,
           newPassword,
@@ -75,7 +75,7 @@ const Profile = ({navigation}) => {
   // Handle Logout
   const handleLogout = async () => {
     try {
-      await axios.delete('http://192.168.1.10:5000/api/v1/logout');
+      await axios.delete('http://192.168.1.16:5000/api/v1/logout');
       // Hapus token sebelum navigasi ke halaman login
       await AsyncStorage.removeItem('accessToken');
       navigation.navigate('Login');
