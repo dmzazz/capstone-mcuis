@@ -8,9 +8,9 @@ import ClockSvg from '../../assets/clock.svg';
 const Card = ({status, time, location, day, smoke, fire}) => {
   // Determine text color based on status
   const textColor =
-    status === 'danger'
+    status === 'Danger'
       ? 'text-red-500'
-      : status === 'attention'
+      : status === 'Attention'
       ? 'text-yellow-500'
       : 'text-black';
 

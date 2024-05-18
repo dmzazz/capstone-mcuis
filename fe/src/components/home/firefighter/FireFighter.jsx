@@ -42,7 +42,7 @@ const FireFighter = ({navigation}) => {
     const fetchNotificationMessage = async () => {
       try {
         const response = await fetch(
-          'http://192.168.1.16:5000/api/v1/firefighter/notification/8',
+          'http://34.125.93.178/api/v1/firefighter/notification/8',
         );
         const notification = await response.json();
         // console.log(notification);

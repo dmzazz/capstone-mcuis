@@ -76,7 +76,7 @@ const User = ({navigation}) => {
 
     const interval = setInterval(() => {
       axios
-        .get('http://192.168.1.10:5000/api/v1/sensor/')
+        .get('http://34.125.93.178/api/v1/sensor/')
         .then(response => {
           const data = response.data.data;
           if (data.length > 0) {
@@ -170,9 +170,6 @@ const User = ({navigation}) => {
             <View className="bg-[#FFCF96] min-w-[150] mb-4 p-1.5 rounded-lg">
               <Text className="text-black">{statusText}</Text>
             </View>
-            <TouchableOpacity onPress={openInMaps}>
-              <Text className="text-blue-500">Open in Google Maps</Text>
-            </TouchableOpacity>
           </View>
 
           <View className={`${status === 'danger' ? 'ml-14' : 'ml-10'}`}>

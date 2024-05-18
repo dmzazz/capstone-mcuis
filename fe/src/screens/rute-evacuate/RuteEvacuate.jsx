@@ -130,9 +130,9 @@ const RuteEvacuate = ({navigation}) => {
         />
         <View className="mt-4 rounded-lg overflow-hidden">
           <Button
-            title="back to home"
+            title="back to early warning"
             color="#4ECB71"
-            onPress={() => navigation.navigate('Home')}
+            onPress={() => navigation.navigate('EarlyWarning')}
           />
         </View>
       </View>

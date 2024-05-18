@@ -26,7 +26,7 @@ const FireFighter = () => {
       const token = await AsyncStorage.getItem('accessToken');
 
       const response = await fetch(
-        'http://192.168.1.16:5000/api/v1/firefighter/confirmation/3',
+        'http://34.125.93.178/api/v1/firefighter/confirmation/2',
         {
           method: 'POST',
           headers: {

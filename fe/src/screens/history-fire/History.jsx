@@ -17,7 +17,7 @@ const History = () => {
   useEffect(() => {
     const fetchData = () => {
       axios
-        .get('http://192.168.1.16:5000/api/v1/sensor/')
+        .get('http://34.125.93.178/api/v1/sensor/')
         .then(response => {
           setData(response.data.data);
           // console.log(response.data);
