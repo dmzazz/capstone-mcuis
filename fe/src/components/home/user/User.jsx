@@ -1,7 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View, Image} from 'react-native';
-import {getCurrentTime} from '../../../utils/dateUtils.js';
+import {
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Linking,
+  PermissionsAndroid,
+} from 'react-native';
+import Geolocation from '@react-native-community/geolocation';
 import axios from 'axios';
+import {getCurrentTime} from '../../../utils/dateUtils.js';
 
 // Import component
 import AlertUser from '../../alert-user/AlertUser.jsx';
@@ -15,41 +23,82 @@ const User = ({navigation}) => {
   const [status, setStatus] = useState('Normal');
   const [lastFetchTime, setLastFetchTime] = useState(Date.now());
   const [showAlert, setShowAlert] = useState(false);
-
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
   const [currentTime, setCurrentTime] = useState('');
 
-  // Untuk menemukan apakah data baru berdasarkan waktu saat ini
   const isNewData = createdAt => {
     const dataTime = new Date(createdAt).getTime();
     return dataTime > lastFetchTime;
   };
 
+  const requestLocationPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: 'Location Permission',
+          message: 'This app needs access to your location.',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log('Location permission granted');
+        getCurrentLocation();
+      } else {
+        console.log('Location permission denied');
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+
+  const getCurrentLocation = () => {
+    Geolocation.getCurrentPosition(
+      position => {
+        const {latitude, longitude} = position.coords;
+        setLatitude(latitude);
+        setLongitude(longitude);
+      },
+      error => console.error('Error fetching location:', error),
+      {
+        enableHighAccuracy: true,
+        timeout: 15000,
+        maximumAge: 1000,
+      },
+    );
+  };
+
   useEffect(() => {
+    requestLocationPermission();
+
     const interval = setInterval(() => {
       axios
-        .get('http://192.168.1.10:5000/api/v1/sensor/')
+        .get('http://34.125.93.178/api/v1/sensor/')
         .then(response => {
           const data = response.data.data;
           if (data.length > 0) {
-            const latestData = data[data.length - 1]; // assuming the latest data is at the end
+            const latestData = data[data.length - 1];
             if (isNewData(latestData.createdAt)) {
-              setLastFetchTime(Date.now()); // update data terakhir yang diambil berdasarkan waktu saat ini
-              setStatus(latestData.status); // update status berdasarkan data terakhir
+              setLastFetchTime(Date.now());
+              setStatus(latestData.status);
               console.log(latestData.status);
             }
           }
         })
         .catch(error => console.error('Error fetching data:', error));
-    }, 1000); // fetch every second
+    }, 1000);
 
     if (status === 'Danger') {
-      alertTimeout = setTimeout(() => {
+      setTimeout(() => {
         setShowAlert(true);
-      }, 5000); // Display alert after 5 seconds
+      }, 5000);
     }
 
     const timeout = setTimeout(() => {
-      setStatus('Normal'); // Kembali ke status normal jika tidak ada data terbaru
+      setStatus('Normal');
     }, 10000);
 
     return () => {
@@ -60,13 +109,21 @@ const User = ({navigation}) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentTime(getCurrentTime()); // Gunakan utilitas getCurrentTime
+      setCurrentTime(getCurrentTime());
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
-  // Function to render image and text based on status
+  const openInMaps = () => {
+    if (latitude && longitude) {
+      const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+      Linking.openURL(url).catch(err =>
+        console.error('Error opening Google Maps:', err),
+      );
+    }
+  };
+
   const renderStatus = () => {
     let statusTitle, statusIcon, statusText, imageSource, statusTitleColor;
     switch (status) {

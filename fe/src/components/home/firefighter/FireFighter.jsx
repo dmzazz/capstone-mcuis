@@ -19,7 +19,7 @@ const FireFighter = ({navigation}) => {
   const steps = [
     {icon: <StepOne width={40} height={40} />, text: 'Stay Calm'},
     {icon: <StepTwo width={40} height={40} />, text: 'Notification appears'},
-    { 
+    {
       icon: <StepThree width={40} height={40} />,
       text: 'You will redirected to the confirmation page',
     },
@@ -42,7 +42,7 @@ const FireFighter = ({navigation}) => {
     const fetchNotificationMessage = async () => {
       try {
         const response = await fetch(
-          'http://192.168.1.10:5000/api/v1/firefighter/notification/8',
+          'http://34.125.93.178/api/v1/firefighter/notification/8',
         );
         const notification = await response.json();
         // console.log(notification);
