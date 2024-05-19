@@ -20,7 +20,6 @@ const Stack = createNativeStackNavigator();
 
 // Bottom
 const App = () => {
-  const [auth, setAuth] = useState('false');
   //   useEffect(() => {
   //     const fetchAccessToken = async () => {
   //       try {

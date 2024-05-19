@@ -3,8 +3,6 @@ import {
   Text,
   View,
   Image,
-  TouchableOpacity,
-  Linking,
   PermissionsAndroid,
 } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
@@ -114,15 +112,6 @@ const User = ({navigation}) => {
 
     return () => clearInterval(interval);
   }, []);
-
-  const openInMaps = () => {
-    if (latitude && longitude) {
-      const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
-      Linking.openURL(url).catch(err =>
-        console.error('Error opening Google Maps:', err),
-      );
-    }
-  };
 
   const renderStatus = () => {
     let statusTitle, statusIcon, statusText, imageSource, statusTitleColor;
