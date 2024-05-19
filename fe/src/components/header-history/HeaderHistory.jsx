@@ -51,7 +51,8 @@ const HeaderHistory = ({searchQuery, setSearchQuery}) => {
                 autoFocus={true}
                 value={searchQuery}
                 onChangeText={setSearchQuery}
-                className="bg-gray-100 mr-5 px-4 rounded-lg"
+                placeholderTextColor="grey"
+                className="bg-gray-100 text-black mr-5 px-4 rounded-lg"
               />
             </View>
           </>

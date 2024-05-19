@@ -123,7 +123,8 @@ const Profile = ({navigation}) => {
               value={oldPassword}
               onChangeText={setOldPassword}
               secureTextEntry
-              className="w-80 h-10 pl-4 border rounded-md"
+              placeholderTextColor="grey"
+              className="w-80 h-10 pl-4 border text-black rounded-md"
             />
           </View>
           <View className="mt-2">
@@ -134,7 +135,8 @@ const Profile = ({navigation}) => {
               value={newPassword}
               onChangeText={setNewPassword}
               secureTextEntry
-              className="w-80 h-10 pl-4 border rounded-md"
+              placeholderTextColor="grey"
+              className="w-80 h-10 pl-4 border text-black rounded-md"
             />
           </View>
           <View className="mt-2">
@@ -145,7 +147,8 @@ const Profile = ({navigation}) => {
               value={confirmPassword}
               onChangeText={setConfirmPassword}
               secureTextEntry
-              className="w-80 h-10 pl-4 border rounded-md"
+              placeholderTextColor="grey"
+              className="w-80 h-10 pl-4 border text-black rounded-md"
             />
           </View>
 

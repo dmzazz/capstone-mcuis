@@ -14,8 +14,6 @@ import {useNavigation} from '@react-navigation/native';
 // Import axios
 import axios from 'axios';
 
-import jwt_decode from 'jwt-decode';
-
 // Import AsyncStorage
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -29,6 +27,16 @@ const Login = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    // Periksa keberadaan token akses saat aplikasi dimulai
+    const accessToken = AsyncStorage.getItem('accessToken');
+    // Jika token akses ada, arahkan ke layar utama
+    if (accessToken && accessToken) {
+      // Navigate to home screen
+      navigation.navigate('Main');
+    }
+  }, []);
 
   // Handle Lpgin
   const handleSubmit = async () => {
@@ -50,13 +58,10 @@ const Login = () => {
       setLoading(true);
 
       // No need for Authorization header in login request
-      const response = await axios.post(
-        'http://34.125.93.178/api/v1/login/',
-        {
-          email,
-          password,
-        },
-      );
+      const response = await axios.post('http://34.125.93.178/api/v1/login/', {
+        email,
+        password,
+      });
 
       if (response.status === 200) {
         // Assuming you want to save the accessToken here
@@ -100,7 +105,9 @@ const Login = () => {
         {/* Use HeaderImage component */}
         <HeaderImage style={styles.headerImage} />
         <Image source={require('../../assets/logo.png')} style={styles.logo} />
-        <Text className="text-lg mb-6">Welcome, please log in first!</Text>
+        <Text className="text-black text-lg mb-6">
+          Welcome, please log in first!
+        </Text>
 
         {error && <Text className="text-red-500">{error}</Text>}
 
@@ -115,7 +122,8 @@ const Login = () => {
             autoComplete="email"
             value={email}
             onChangeText={setEmail}
-            className="px-2 py-2"
+            placeholderTextColor="grey"
+            className="text-black px-2 py-2"
           />
         </View>
 
@@ -130,15 +138,11 @@ const Login = () => {
             autoComplete="current-password"
             secureTextEntry={true}
             value={password}
-            className="px-2 py-2"
             onChangeText={setPassword}
+            placeholderTextColor="grey"
+            className="text-black px-2 py-2"
           />
         </View>
-
-        <Text className="my-4">
-          Don't have an account?{' '}
-          <Text className="text-[#FFA447] font-bold">Register</Text> now
-        </Text>
 
         <TouchableOpacity
           activeOpacity={0.7}

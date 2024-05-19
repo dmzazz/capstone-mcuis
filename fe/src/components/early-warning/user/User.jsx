@@ -49,7 +49,7 @@ const User = ({navigation}) => {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({firefighterId: 8, message: 'danger'}),
+        body: JSON.stringify({firefighterId: 1, message: 'danger'}),
       });
 
       // Menguraikan respons dari server ke dalam format JSON
